@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use App\Services\TimetableGenerator;
 
 class DatabaseSeeder extends Seeder
 {
@@ -290,14 +291,68 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        // 11. Création d'un Étudiant par défaut
-        $student = User::create([
-            'name' => 'Fouda Christian',
-            'email' => 'student@iuc.cm',
-            'password' => Hash::make('StudentPassword'),
-            'department_id' => $dept->id,
-            'phone' => '+237 600 000 002',
-        ]);
-        $student->assignRole($etudiantRole);
+        // 11. Création de cinq Étudiants par défaut
+        $studentsData = [
+            [
+                'name' => 'Fouda Christian',
+                'email' => 'student1@iuc.cm',
+                'phone' => '+237 600 000 002',
+            ],
+            [
+                'name' => 'Ngassa Esther',
+                'email' => 'student2@iuc.cm',
+                'phone' => '+237 600 000 003',
+            ],
+            [
+                'name' => 'professionnel Ismael',
+                'email' => 'student3@iuc.cm',
+                'phone' => '+237 600 000 004',
+            ],
+            [
+                'name' => 'Colorado Gallaher',
+                'email' => 'student4@iuc.cm',
+                'phone' => '+237 600 000 005',
+            ],
+            [
+                'name' => 'Mbe Njoum Solange',
+                'email' => 'student5@iuc.cm',
+                'phone' => '+237 600 000 006',
+            ],
+        ];
+
+        $studentClassMap = [
+            $classeJour->id,
+            $classeJour->id,
+            $classeSoir->id,
+            $classeSoir->id,
+            $classeJour->id,
+        ];
+
+        foreach ($studentsData as $index => $studentData) {
+            $student = User::create([
+                'name' => $studentData['name'],
+                'email' => $studentData['email'],
+                'password' => Hash::make('StudentPassword'),
+                'department_id' => $dept->id,
+                'classe_id' => $studentClassMap[$index] ?? $classeJour->id,
+                'phone' => $studentData['phone'],
+            ]);
+            $student->assignRole($etudiantRole);
+        }
+
+        // 12. Générer les emplois du temps pour les classes créées (brouillon)
+        try {
+            $generator = new TimetableGenerator();
+            $t1 = $generator->generateForClasse($classeJour->id);
+            $t1->status = 'publie';
+            $t1->save();
+
+            $t2 = $generator->generateForClasse($classeSoir->id);
+            $t2->status = 'publie';
+            $t2->save();
+        } catch (\Exception $e) {
+            // Ne pas bloquer le seeding si la génération échoue en environnement de test
+            // Log::error('Timetable generation failed: ' . $e->getMessage());
+        }
     }
 }

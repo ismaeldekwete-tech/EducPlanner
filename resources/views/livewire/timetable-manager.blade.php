@@ -241,8 +241,8 @@
                                                                 </div>
 
                                                                 <div class="font-bold text-xs line-clamp-2 leading-snug mb-1">{{ $entry['subject_teacher']['subject']['name'] ?? 'N/A' }}</div>
-                                                                <div class="text-[10px] opacity-80 font-medium truncate mb-1">👨‍🏫 {{ $entry['subject_teacher']['teacher']['name'] ?? '---' }}</div>
-                                                                <div class="text-[9px] opacity-75 font-semibold">📍 {{ $entry['room']['name'] ?? 'N/A' }}</div>
+                                                                <div class="text-[10px] opacity-80 font-medium truncate mb-1">  {{ $entry['subject_teacher']['teacher']['name'] ?? '---' }}</div>
+                                                                <div class="text-[9px] opacity-75 font-semibold">   {{ $entry['room']['name'] ?? 'N/A' }}</div>
 
                                                                 @if($entry['teacher_status'] === 'refuse')
                                                                     <div class="mt-1 text-[9px] text-rose-600 dark:text-rose-400 font-bold bg-rose-50/80 dark:bg-rose-950/40 px-1 py-0.5 rounded border border-rose-100 dark:border-rose-900/30 truncate" title="{{ $entry['rejection_reason'] ?? __('Refusé') }}">
@@ -271,8 +271,8 @@
                                                                 </div>
 
                                                                 <div class="font-bold text-xs line-clamp-2 leading-snug mb-1">{{ $entry['subject_teacher']['subject']['name'] ?? 'N/A' }}</div>
-                                                                <div class="text-[10px] opacity-80 font-medium truncate mb-1">👨‍🏫 {{ $entry['subject_teacher']['teacher']['name'] ?? '---' }}</div>
-                                                                <div class="text-[9px] opacity-75 font-semibold">📍 {{ $entry['room']['name'] ?? 'N/A' }}</div>
+                                                                <div class="text-[10px] opacity-80 font-medium truncate mb-1">  {{ $entry['subject_teacher']['teacher']['name'] ?? '---' }}</div>
+                                                                <div class="text-[9px] opacity-75 font-semibold">   {{ $entry['room']['name'] ?? 'N/A' }}</div>
 
                                                                 @if($entry['teacher_status'] === 'refuse')
                                                                     <div class="mt-1 text-[9px] text-rose-600 dark:text-rose-400 font-bold bg-rose-50/80 dark:bg-rose-950/40 px-1 py-0.5 rounded border border-rose-100 dark:border-rose-900/30 truncate" title="{{ $entry['rejection_reason'] ?? __('Refusé') }}">
@@ -537,7 +537,7 @@
                                     <tr class="hover:bg-slate-50/40 dark:hover:bg-slate-800/10">
                                         <td class="p-4 font-bold text-slate-800 dark:text-white">{{ $asm->classe->code_unique ?? '---' }}</td>
                                         <td class="p-4 font-medium text-slate-700 dark:text-slate-300">{{ $asm->subject->name ?? '---' }}</td>
-                                        <td class="p-4 text-slate-600 dark:text-slate-400">👨‍🏫 {{ $asm->teacher->name ?? '---' }}</td>
+                                        <td class="p-4 text-slate-600 dark:text-slate-400">  {{ $asm->teacher->name ?? '---' }}</td>
                                         <td class="p-4 text-center">
                                             @php
                                                 $badgeStyle = $asm->type === 'CM' ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300' : ($asm->type === 'TD' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300');
@@ -768,7 +768,7 @@
             <div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xl w-full max-w-md overflow-hidden transform transition-all duration-300">
                 <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
                     <h3 class="text-base font-bold text-slate-800 dark:text-white">
-                        📍 {{ $roomId ? __('Modifier la Salle') : __('Créer une Salle') }}
+                           {{ $roomId ? __('Modifier la Salle') : __('Créer une Salle') }}
                     </h3>
                     <button wire:click="$set('showRoomModal', false)" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>

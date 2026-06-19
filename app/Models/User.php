@@ -17,10 +17,16 @@ class User extends Authenticatable
     protected $keyType = 'string';
 
     protected $fillable = [
-        'name', 'email', 'password', 'department_id', 'phone', 'lang',
+        'name', 'email', 'password', 'department_id', 'classe_id', 'phone', 'lang',
         'two_factor_secret', 'two_factor_confirmed_at', 'two_factor_type',
         'email_otp_code', 'email_otp_expires_at'
     ];
+
+    // Relation vers la classe de l'étudiant
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class, 'classe_id');
+    }
 
     // Génération UUID à la création
     protected static function boot()

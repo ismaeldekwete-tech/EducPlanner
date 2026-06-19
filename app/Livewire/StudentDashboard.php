@@ -20,6 +20,13 @@ class StudentDashboard extends Component
             abort(403, 'Accès réservé aux étudiants.');
         }
 
+        $studentClassId = auth()->user()->classe_id;
+        if ($studentClassId) {
+            $this->selectedClasseId = $studentClassId;
+            $this->loadTimetable();
+            return;
+        }
+
         $firstClass = Classe::first();
         if ($firstClass) {
             $this->selectedClasseId = $firstClass->id;

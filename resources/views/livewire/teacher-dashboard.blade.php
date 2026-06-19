@@ -5,7 +5,7 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="flex items-center space-x-4">
                     <div class="w-12 h-12 bg-emerald-600 dark:bg-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-emerald-100 dark:shadow-none">
-                        👨‍🏫
+                         
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold text-slate-800 dark:text-white">{{ __('Espace Enseignant') }} : {{ $teacher->name }}</h1>
@@ -149,7 +149,7 @@
                                                         </div>
                                                         <div class="font-bold text-xs line-clamp-2 leading-snug mb-1">{{ $entry->subjectTeacher->subject->name ?? 'N/A' }}</div>
                                                         <div class="text-[10px] opacity-80 font-medium truncate mb-1">🏫 {{ __('Classe :') }} {{ $entry->timetable->classe->code_unique }}</div>
-                                                        <div class="text-[9px] opacity-75 font-semibold">📍 {{ $entry->room->name ?? 'N/A' }}</div>
+                                                        <div class="text-[9px] opacity-75 font-semibold">   {{ $entry->room->name ?? 'N/A' }}</div>
                                                     </div>
                                                 @else
                                                     <div class="h-16 border border-dashed border-slate-100 dark:border-slate-800 rounded-xl flex items-center justify-center text-slate-350 dark:text-slate-700 text-xs">

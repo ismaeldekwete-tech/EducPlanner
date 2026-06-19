@@ -13,16 +13,25 @@
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-3">
-                    <label for="classe-select" class="text-sm font-semibold text-slate-600 dark:text-slate-400 min-w-max">{{ __('Classe :') }}</label>
-                    <select id="classe-select" wire:model="selectedClasseId"
-                            class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-150 rounded-xl px-4 py-2 text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-white">
-                        <option value="">-- {{ __('Choisir une classe') }} --</option>
-                        @foreach($classes as $classe)
-                            <option value="{{ $classe->id }}">{{ $classe->code_unique }} ({{ $classe->filiere }} - {{ $classe->regime === 'J' ? __('Jour') : __('Soir') }})</option>
-                        @endforeach
-                    </select>
-                </div>
+                @if(auth()->user()->classe)
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">{{ __('Classe :') }}</span>
+                        <div class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm font-medium">
+                            {{ auth()->user()->classe->code_unique }} ({{ auth()->user()->classe->filiere }} - {{ auth()->user()->classe->regime === 'J' ? __('Jour') : __('Soir') }})
+                        </div>
+                    </div>
+                @else
+                    <div class="flex items-center space-x-3">
+                        <label for="classe-select" class="text-sm font-semibold text-slate-600 dark:text-slate-400 min-w-max">{{ __('Classe :') }}</label>
+                        <select id="classe-select" wire:model="selectedClasseId"
+                                class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-150 rounded-xl px-4 py-2 text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-white">
+                            <option value="">-- {{ __('Choisir une classe') }} --</option>
+                            @foreach($classes as $classe)
+                                <option value="{{ $classe->id }}">{{ $classe->code_unique }} ({{ $classe->filiere }} - {{ $classe->regime === 'J' ? __('Jour') : __('Soir') }})</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -105,8 +114,8 @@
                                                         <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded {{ $badgeClass }}">{{ $type }}</span>
                                                     </div>
                                                     <div class="font-bold text-xs line-clamp-2 leading-snug mb-1">{{ $entry['subject_teacher']['subject']['name'] ?? 'N/A' }}</div>
-                                                    <div class="text-[10px] opacity-80 font-medium truncate mb-1">👨‍🏫 {{ $entry['subject_teacher']['teacher']['name'] ?? 'N/A' }}</div>
-                                                    <div class="text-[9px] opacity-75 font-semibold">📍 {{ $entry['room']['name'] ?? 'N/A' }}</div>
+                                                    <div class="text-[10px] opacity-80 font-medium truncate mb-1">  {{ $entry['subject_teacher']['teacher']['name'] ?? 'N/A' }}</div>
+                                                    <div class="text-[9px] opacity-75 font-semibold">   {{ $entry['room']['name'] ?? 'N/A' }}</div>
                                                 </div>
                                             @else
                                                 <div class="h-16 border border-dashed border-slate-100 dark:border-slate-800 rounded-xl flex items-center justify-center text-slate-350 dark:text-slate-700 text-xs">
